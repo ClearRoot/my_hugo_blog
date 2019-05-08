@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .completed{
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+    <!-- Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- Firebase -->
+    <script src="https://gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <!-- VueFire -->
+    <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <select v-model="status">
+            <option value="all">전체보기</option>
+            <option value="active">할일</option>
+            <option value="completed">한일</option>
+        </select>
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+        <li v-for="(todo, index) in todosByStatus()" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id">
+            <input type="checkbox" v-model="todo.completed" @change="updateTodo(todo)">
+            {{todo.content}}
+            <button v-if="todo.completed" @click="delTodo(index)">delete</button>
+        </li>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script>
+        var config = {
+            apiKey: "AIzaSyBo2ZFJ8mWlg-8WnEiYOqsrI4umscDm2Cg",
+            databaseURL: "https://my-todo-dcfd5.firebaseio.com",
+            projectId: "my-todo-dcfd5",
+        };
+        firebase.initializeApp(config);
+
+        const database = firebase.database()
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                title: "MyToDo",
+                // todos: todoStorage.fetch(),
+                newTodo: "",
+                status: "all",
+            },
+            firebase: {
+                todos: database.ref("todos"),
+            },
+            methods: {
+                addTodo: function(){
+                    if (this.newTodo){
+                        this.$firebaseRefs.todos.push(
+                            {id: Date.now(), content: this.newTodo, completed:false}
+                        )
+                        this.newTodo = ""
+                    }
+                },
+                todosByStatus: function(){
+                    if (this.status == "active"){
+                        return this.todos.filter((todo) => {
+                           return !todo.completed
+                        })
+                    }else if (this.status == "completed"){
+                        return this.todos.filter((todo) => {
+                           return todo.completed
+                        })
+                    }else {
+                        return this.todos
+                    }
+                },
+                updateTodo: function(todo){
+                    const editTodo = {...todo}
+                    delete editTodo[".key"]
+                    this.$firebaseRefs.todos.child(todo[".key"]).set(editTodo)
+                },
+            },
+            watch: {
+                todos: {
+                    handler: function(todos){
+                        todoStorage.save(todos)
+                    }
+                },
+                    
+            },
+        })
+    </script>
+</body>
+</html>
