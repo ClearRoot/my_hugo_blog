@@ -27,10 +27,10 @@
             <option value="completed">한일</option>
         </select>
         <input type="text" v-model="newTodo" @keyup.enter="addTodo">
-        <li v-for="(todo, index) in todosByStatus()" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id">
+        <li v-for="todo in todosByStatus()" v-bind:class="{completed: todo.completed}" v-bind:key="todo.id">
             <input type="checkbox" v-model="todo.completed" @change="updateTodo(todo)">
             {{todo.content}}
-            <button v-if="todo.completed" @click="delTodo(index)">delete</button>
+            <button v-if="todo.completed" @click="delTodo(todo)">delete</button>
         </li>
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
@@ -81,6 +81,9 @@
                     const editTodo = {...todo}
                     delete editTodo[".key"]
                     this.$firebaseRefs.todos.child(todo[".key"]).set(editTodo)
+                },
+                delTodo: function(todo){
+                    this.$firebaseRefs.todos.child(todo[".key"]).remove()
                 },
             },
             watch: {
