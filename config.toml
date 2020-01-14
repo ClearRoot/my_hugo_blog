@@ -4,6 +4,8 @@ title = "Clear Root"
 
 theme = "mainroad"
 paginate = "10"
+googleAnalytics = "UA-144747776-2"
+disqusShortname = "clearroot"
 
 [Author]
   name = "Jo Hogeun"
@@ -16,7 +18,7 @@ paginate = "10"
   opengraph = true # Enable OpenGraph if true
   twitter_cards = false # Enable Twitter Cards if true
   readmore = false # Show "Read more" button in list if true
-  authorbox = false # Show authorbox at bottom of pages if true
+  authorbox = true # Show authorbox at bottom of pages if true
   toc = true # 목차 사용
   post_navigation = true # Show post navigation at bottom of pages if true
   post_meta = ["date", "categories", "translations"] # 메타 정보 게시 순서
