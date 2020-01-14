@@ -1,3 +1,44 @@
 baseURL = "http://clearroot.github.io/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Clear Root"
+
+theme = "mainroad"
+paginate = "10"
+
+[Author]
+  name = "Jo Hogeun"
+  bio = "축산학을 전공하고 웹개발자를 목표로 하는 이상한놈"
+  avatar = "img/my_avatar.png"
+
+[Params]
+  subtitle = "장난삼아 만들고 빡세게 마무리" # Subtitle of your site. Used in site header
+  description = "Personal blog for record" # 사이트 설명. 메타 설명에 사용
+  opengraph = true # Enable OpenGraph if true
+  twitter_cards = false # Enable Twitter Cards if true
+  readmore = false # Show "Read more" button in list if true
+  authorbox = false # Show authorbox at bottom of pages if true
+  toc = true # 목차 사용
+  post_navigation = true # Show post navigation at bottom of pages if true
+  post_meta = ["date", "categories", "translations"] # 메타 정보 게시 순서
+  mainSections = ["post", "blog", "news"] # 홈페이지 및 "최근 기사" 위젯에 표시 할 섹션 페이지 지정
+  dateformat = "2006-01-02" # 날짜 형식 변경
+  mathjax = true # Enable MathJax
+  mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js" # Specify MathJax path
+  mathjaxConfig = "TeX-AMS-MML_HTMLorMML" # Specify MathJax config
+  highlightColor = "#428DFF" # Override highlight color
+
+[Params.sidebar]
+  home = "right" # Configure layout for home page
+  list = "left"  # Configure layout for list pages
+  single = false # Configure layout for single pages
+  # 주어진 순서대로 위젯 사용
+  widgets = ["search", "recent", "categories", "taglist", "social", "languages"]
+
+[Params.widgets]
+  recent_num = 5 # "최근 기사" 위젯에서 기사 수 설정
+  tags_counter = false # "태그" 위젯에서 각 태그에 카운터 사용
+
+[Params.widgets.social]
+  # Enable parts of social widget
+  github = "ClearRoot"
+  email = "jhk7767@gmail.com"
