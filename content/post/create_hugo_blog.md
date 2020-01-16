@@ -11,8 +11,6 @@ sidebar: true
 comments: true
 authorbox: true
 toc: true
-
-draft: true
 ---
 
 
