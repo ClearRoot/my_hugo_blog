@@ -1,6 +1,6 @@
-baseURL = "http://clearroot.github.io/"
+baseURL = "https://clearroot.github.io"
 languageCode = "en-us"
-title = "Clear Root"
+title = "Jo Hogeun Blog"
 
 theme = "mainroad"
 paginate = "10"
@@ -31,7 +31,7 @@ disqusShortname = "clearroot"
 
 [Params.sidebar]
   home = "right" # Configure layout for home page
-  list = "left"  # Configure layout for list pages
+  list = "right"  # Configure layout for list pages
   single = false # Configure layout for single pages
   # 주어진 순서대로 위젯 사용
   widgets = ["search", "recent", "categories", "taglist", "social", "languages"]
